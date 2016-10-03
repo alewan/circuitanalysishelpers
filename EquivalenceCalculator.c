@@ -1,4 +1,4 @@
-//Created by Aleksei Wan on March 19, 2016
+//Created on March 19, 2016
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -11,7 +11,7 @@ int main (void) {
     printf("\nResistor (R), Capacitor (C), Inductor (I), or Default (D) (any other key to exit): "); //Default: two parallel resistors
     scanf(" %c", &etype);
     
-    //Core Action
+    //Main Action
     while ((etype =='R')||(etype =='C')||(etype =='I')||(etype=='D')) {
         //Determining whether to add inverse based on user input and number of values to read in
         if (etype == 'D') {
