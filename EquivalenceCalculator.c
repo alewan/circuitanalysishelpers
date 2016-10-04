@@ -37,7 +37,7 @@ int main (void) {
         for (int i = 0; i < number; i++)
         {
             scanf("%lf", &holder);
-	        value += ((addInverse)? 1/holder : holder);
+	    value += ((addInverse)? 1/holder : holder);
         }
         printf("Final Value: %.8lf\n\n", ((addInverse)? 1/value : value));
         
