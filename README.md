@@ -1,2 +1,4 @@
-# circuitanalysishelpers
-Very basic code to help with circuit analysis problems
+# circuithelpers
+Very basic code (in C/C++) to help with simplifying circuits.
+
+(also a test repo)
