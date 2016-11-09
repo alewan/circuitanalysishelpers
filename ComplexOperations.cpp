@@ -1,3 +1,4 @@
+//Created by A Wan on November 5, 2016
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -22,25 +23,25 @@ int main (void) {
 		cout << "Enter type (1 for standard form, 2 for polar form): ";
 		cin >> inputtype;
 		
-		if(inputtype == 1) {
-			cout << "Enter first complex number (as Re{z1} Im{z1}): ";
-			cin >> re1 >> im1;
-			cout << "Enter second complex number (as Re{z2} Im{z2}): ";
-			cin >> re2 >> im2;
-		}
-		else if (inputtype == 2) {
-			double temp1, temp2;
-			cout << "Enter first complex number (as |z1| angle(z1)): ";
-			cin >> temp1 >> temp2;
-			polarSTDConversion(temp1, temp2, re1, im1);
-			cout << "Enter second complex number (as |z2| angle(z2)): ";
-			cin >> temp1 >> temp2;
-			polarSTDConversion(temp1, temp2, re2, im2);
-		}
-		else {
-			validInput = false;
-			cout << "Error, you gave "<<invalidValue<<" as input. Please retry and enter either 1 or 2."<<endl<<endl;
-		}
+			if(inputtype == 1) {
+				cout << "Enter first complex number (as Re{z1} Im{z1}): ";
+				cin >> re1 >> im1;
+				cout << "Enter second complex number (as Re{z2} Im{z2}): ";
+				cin >> re2 >> im2;
+			}
+			else if (inputtype == 2) {
+				double temp1, temp2;
+				cout << "Enter first complex number (as |z1| angle(z1)): ";
+				cin >> temp1 >> temp2;
+				polarSTDConversion(temp1, temp2, re1, im1);
+				cout << "Enter second complex number (as |z2| angle(z2)): ";
+				cin >> temp1 >> temp2;
+				polarSTDConversion(temp1, temp2, re2, im2);
+			}
+			else {
+				validInput = false;
+				cout << "Error, you gave "<<inputtype<<" as input. Please retry and enter either 1 or 2."<<endl<<endl;
+			}
 	} while (!validInput);
 
 	double resultre, resultim;
