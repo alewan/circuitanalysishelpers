@@ -45,20 +45,53 @@ Complex::~Complex() {
 	//Nothing to be done
 }
 
-Complex Complex::operator+(const Complex &rhs) const {
+Complex Complex::inverse (void) const {
+	Complex a(1,0);
+	return (a/(*this));
+}
+
+Complex Complex::operator+(const Complex& rhs) const {
 	return Complex(real+rhs.real, imaginary+rhs.imaginary);
 }
 
-Complex Complex::operator-(const Complex &rhs) const {
+Complex Complex::operator-(const Complex& rhs) const {
 	return Complex(real-rhs.real, imaginary-rhs.imaginary);
 }
 
-Complex Complex::operator*(const Complex &rhs) const {
+Complex Complex::operator*(const Complex& rhs) const {
 	return Complex((real*rhs.real + ((-1)*imaginary*rhs.imaginary)), (real*rhs.imaginary + rhs.real*imaginary));
 }
 
-Complex Complex::operator/(const Complex &rhs) const {
+Complex Complex::operator/(const Complex& rhs) const {
 	return Complex(((real*rhs.real + imaginary*rhs.imaginary)/(rhs.real*rhs.real + rhs.imaginary*rhs.imaginary)), ((imaginary*rhs.real - rhs.imaginary*real)/(rhs.real*rhs.real + rhs.imaginary*rhs.imaginary)));
+}
+
+Complex& Complex::operator+=(const Complex& rhs){
+	return ((*this) = (*this)+rhs); //return type of assignment operator is Complex&
+}
+
+istream& operator>>(istream& in, Complex*& inVal) {
+	int type;
+	double temp1,temp2;
+
+	cout << "Enter input type (1 for standard form, 2 for polar form): ";
+	in >> type;
+	
+	if (type == 1) {
+		cout << "Enter first complex number (as Re{z1} Im{z1}): ";
+		in >> temp1 >> temp2;
+		inVal = new Complex(temp1,temp2);
+	}
+	else if (type == 2) {
+		cout << "Enter first complex number (as |z1| arg{z1} (in degrees)): ";
+		in >> temp1 >> temp2;
+		inVal = new Complex(temp1,temp2,false);
+	}
+	else
+		cout << "Error, you gave "<<type<<" as input. Please retry and enter either 1 or 2.";
+	
+	cout<<endl;
+	return in;
 }
 
 ostream& operator<<(ostream& out, const Complex& outVal) {
