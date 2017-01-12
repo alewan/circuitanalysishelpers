@@ -99,3 +99,4 @@ ostream& operator<<(ostream& out, const Complex& outVal) {
 	out<<outVal.real<<sign<<outVal.imaginary<<"i"<<" ("<<outVal.magnitude<<","<<outVal.angle<<")"<<endl;
 	return out;
 }
+

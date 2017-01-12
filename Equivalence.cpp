@@ -8,11 +8,13 @@
 #define PROMPT "Phasor Domain [AC] (P), Resistive (R), Capacitive (C), Inductive (I), or Default (D): "
 
 //Function prototypes
-//Could use many tactics (e.g. templating) to avoid writing duplicate code, but for this small program this is a simpler approach
 double readAddDoubleValues (bool);
 Complex readAddComplexValues (bool);
+//Could use many tactics (e.g. templating) to avoid writing duplicate code, but for this small program this is a simpler approach
 
+//Main Function
 int main (void) {
+    //Initialization of variables and configuring cout
     char domain = 0, atype = 0, etype = 0; //Arrangement type, Element type
     bool addInverse = false;
     cout<<fixed<<setprecision(5)<<endl;
@@ -57,7 +59,7 @@ double readAddDoubleValues (bool addInverse) {
                 cin.clear();
                 break;
             }
-	        value += ((addInverse)? 1/holder : holder);
+		    value += ((addInverse)? 1/holder : holder);
         }
     return value;
 }
@@ -67,7 +69,7 @@ Complex readAddComplexValues (bool addInverse) {
     Complex value;
     Complex* holder;
         while (!cin.eof()){
-            cin>>holder;
+            cin>>holder; //Note: the extraction operator dynamically allocates Complex object and reads values to it (necessitating delete later)
             if (cin.fail()) {
                 cin.clear();
                 break;
