@@ -1,20 +1,23 @@
 //Created by A Wan on December 21, 2016
+//Include Statements
 #include <iostream>
 #include <iomanip>
 #include "Complex.h" //Taking advantage of custom Complex class developed for another project
 
+//Preprocessor definitions
 #define PROMPT "Phasor Domain [AC] (P), Resistive (R), Capacitive (C), Inductive (I), or Default (D): "
 
+//Function prototypes
+//Could use many tactics (e.g. templating) to avoid writing duplicate code, but for this small program this is a simpler approach
 double readAddDoubleValues (bool);
 Complex readAddComplexValues (bool);
-//Could have also used dynamic binding to avoid duplicating code by replacing double/Complex with generic cct element
-//and using inheritance, but this is simpler and will run infinitesimally faster (primarily via static bind)
 
 int main (void) {
     char domain = 0, atype = 0, etype = 0; //Arrangement type, Element type
     bool addInverse = false;
     cout<<fixed<<setprecision(5)<<endl;
     
+    //Initial Prompt
     cout<<"This program helps find equivalences of basic circuits."<<endl
         <<"Please choose a network type to analyze. (Default is two parallel resistors)"<<endl;
     cout<<PROMPT;
@@ -45,6 +48,7 @@ int main (void) {
 	return(0);
 }
 
+//Function to read in double values until EOF received and return the appropriate result
 double readAddDoubleValues (bool addInverse) {
     double value = 0, holder;
         while (!cin.eof()){
@@ -58,6 +62,7 @@ double readAddDoubleValues (bool addInverse) {
     return value;
 }
 
+//Function to read in Complex values until EOF received and return the appropriate result
 Complex readAddComplexValues (bool addInverse) {
     Complex value;
     Complex* holder;
