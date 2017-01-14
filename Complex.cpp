@@ -70,7 +70,7 @@ Complex& Complex::operator+=(const Complex& rhs){
 	return ((*this) = (*this)+rhs); //return type of assignment operator is Complex&
 }
 
-istream& operator>>(istream& in, Complex*& inVal) {
+istream& operator>>(istream& in, Complex& inVal) {
 	int type;
 	double temp1,temp2;
 
@@ -80,15 +80,17 @@ istream& operator>>(istream& in, Complex*& inVal) {
 	if (type == 1) {
 		cout << "Enter first complex number (as Re{z1} Im{z1}): ";
 		in >> temp1 >> temp2;
-		inVal = new Complex(temp1,temp2);
+		inVal = Complex(temp1,temp2);
 	}
 	else if (type == 2) {
 		cout << "Enter first complex number (as |z1| arg{z1} (in degrees)): ";
 		in >> temp1 >> temp2;
-		inVal = new Complex(temp1,temp2,false);
+		inVal = Complex(temp1,temp2,false);
 	}
-	else
+	else {
 		cout << "Error, you gave "<<type<<" as input. Please retry and enter either 1 or 2.";
+		inVal = Complex();
+	}
 	
 	cout<<endl;
 	return in;

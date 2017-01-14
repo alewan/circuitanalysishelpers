@@ -31,11 +31,11 @@ public:
 	Complex operator/(const Complex&rhs) const;
 	Complex& operator+=(const Complex&);
 
-	friend istream& operator>>(istream&, Complex*&);
+	friend istream& operator>>(istream&, Complex&);
 	friend ostream& operator<<(ostream&, const Complex&);
 };
 
-istream& operator>>(istream&, const Complex*&); //Note: sends prompts to std::cout
+istream& operator>>(istream&, const Complex&); //Note: sends prompts to std::cout
 ostream& operator<<(ostream& out, const Complex& toPrint);
 
 #endif

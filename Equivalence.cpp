@@ -66,15 +66,14 @@ double readAddDoubleValues (bool addInverse) {
 
 //Function to read in Complex values until EOF received and return the appropriate result
 Complex readAddComplexValues (bool addInverse) {
-    Complex value;
-    Complex* holder;
+    Complex value, holder;
         while (!cin.eof()){
-            cin>>holder; //Note: the extraction operator dynamically allocates Complex object and reads values to it (necessitating delete later)
+            cin>>holder;
             if (cin.fail()) {
                 cin.clear();
                 break;
             }
-            value += ((addInverse)? holder->inverse() : *holder);
+            value += ((addInverse)? holder.inverse() : holder);
             delete holder;
         }
     return value;
