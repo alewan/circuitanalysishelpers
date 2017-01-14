@@ -7,10 +7,29 @@
 //Preprocessor definitions
 #define PROMPT "Phasor Domain [AC] (P), Resistive (R), Capacitive (C), Inductive (I), or Default (D): "
 
-//Function prototypes
-double readAddDoubleValues (bool);
-Complex readAddComplexValues (bool);
-//Could use many tactics (e.g. templating) to avoid writing duplicate code, but for this small program this is a simpler approach
+//Read and add function that can handle inverting values (will continue reading values until EOF received and then return)
+//Arguments: value (initially 1 because operator/ is likely defined for a generic class but an inverse might not be), addInverse
+template <class genericType>
+void readAddValues (genericType& value, bool addInverse) {
+    //Initialization
+    genericType holder;
+    genericType inverseConst = value;
+    value -= value;
+
+    //Read until EOF, adjusting value
+    while (!cin.eof()){
+        cin>>holder;
+        if (cin.fail()) {
+            cin.clear();
+            break; //Exiting if unable to read in without modifying value
+        }
+        value += ((addInverse)? inverseConst/holder : holder);
+    }
+
+    //Adjust value and return
+    value = ((addInverse)? inverseConst/value : value);
+    return;
+}
 
 //Main Function
 int main (void) {
@@ -31,50 +50,22 @@ int main (void) {
     else {
         cout<<"Parallel (P) or Series (S): ";
         cin>>atype;
-        addInverse = !(((atype == 'S') && ((etype =='R')||(etype == 'I')))||((atype =='P')&&(etype=='C')));
+        addInverse = (((atype == 'P') && ((etype =='R')||(etype == 'I')||(etype == 'P')))||((atype =='S')&&(etype=='C')));
     }
     
-    //Reading in values and send appropriate result to cout
-    cout<<"Enter values separated by spaces (Use CTRL+D when done): ";
-    if (etype=='P'){
+    //Reading in values and printing result
+    cout<<"Enter values separated by spaces, followed by EOF (CTRL+D) when done:  ";
+    if (etype=='P') {
         cout << endl;
-        Complex value = readAddComplexValues(addInverse);
-        cout<<"Final Value: "<<((addInverse)? value.inverse() : value)<<endl;
+        Complex value = Complex(1,0);
+        readAddValues(value,addInverse);
+        cout<<"Final Value: "<<value<<endl<<endl;
     }
     else {
-        double value = readAddDoubleValues(addInverse);
-        cout<<"Final Value: "<<((addInverse)? 1/value : value)<<endl;
+        double value = 1;
+        readAddValues(value,addInverse);
+        cout<<"Final Value: "<<value<<endl<<endl;
     }
 
-    cout<<endl;
 	return(0);
-}
-
-//Function to read in double values until EOF received and return the appropriate result
-double readAddDoubleValues (bool addInverse) {
-    double value = 0, holder;
-        while (!cin.eof()){
-            cin>>holder;
-            if (cin.fail()) {
-                cin.clear();
-                break;
-            }
-		    value += ((addInverse)? 1/holder : holder);
-        }
-    return value;
-}
-
-//Function to read in Complex values until EOF received and return the appropriate result
-Complex readAddComplexValues (bool addInverse) {
-    Complex value, holder;
-        while (!cin.eof()){
-            cin>>holder;
-            if (cin.fail()) {
-                cin.clear();
-                break;
-            }
-            value += ((addInverse)? holder.inverse() : holder);
-            delete holder;
-        }
-    return value;
 }
