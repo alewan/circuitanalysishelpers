@@ -29,7 +29,9 @@ public:
 	Complex operator-(const Complex&rhs) const;
 	Complex operator*(const Complex&rhs) const;
 	Complex operator/(const Complex&rhs) const;
+	
 	Complex& operator+=(const Complex&);
+	Complex& operator-=(const Complex&);
 
 	friend istream& operator>>(istream&, Complex&);
 	friend ostream& operator<<(ostream&, const Complex&);
