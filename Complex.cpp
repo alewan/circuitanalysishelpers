@@ -46,8 +46,7 @@ Complex::~Complex() {
 }
 
 Complex Complex::inverse (void) const {
-	Complex a(1,0);
-	return (a/(*this));
+	return (Complex(1,0)/(*this));
 }
 
 Complex Complex::operator+(const Complex& rhs) const {

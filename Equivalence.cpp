@@ -26,8 +26,9 @@ void readAddValues (genericType& value, bool addInverse) {
         value += ((addInverse)? inverseConst/holder : holder);
     }
 
-    //Adjust value and return
-    value = ((addInverse)? inverseConst/value : value);
+    //Adjust value (if necessary) and return
+    if (addInverse)
+        value = inverseConst/value;
     return;
 }
 
