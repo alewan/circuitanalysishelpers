@@ -13,6 +13,9 @@ complexops: complexoperations.o complex.o
 deltawye: delta_wyecalculator.cpp
 	@g++ delta_wyecalculator.cpp -o DeltaWyeCalculator
 
+equivalence_original: EquivalenceCalculator.c
+	@cc EquivalenceCalculator.c -o EquivalenceCalculator_original
+
 #Intermediate Object Files (can be removed with cleanobjfiles)
 complex.o: Complex.cpp Complex.h
 	@g++ -c Complex.cpp -o complex.o
@@ -28,5 +31,5 @@ cleanobjfiles:
 	@rm -f *.o
 
 clean: cleanobjfiles
-	@rm -f EquivalenceCalculator ComplexOps DeltaWyeCalculator
+	@rm -f EquivalenceCalculator ComplexOps DeltaWyeCalculator EquivalenceCalculator_original
 	@echo "Task Complete"

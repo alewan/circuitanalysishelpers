@@ -1,14 +1,19 @@
 //Created by awan on March 19, 2016
+//EquivalenceCalculator code in C for RLC circuits
 #include <stdio.h>
 #include <stdbool.h>
 
+//Preprocessor definitions
+#define USERPROMPT "Resistor (R), Capacitor (C), Inductor (I), or Default (D) (any other key to exit): "
+
 int main (void) {
-    char atype = 0, etype = 0;
-    int number;
+    char atype = 0, etype = 0; //arrangement type (Parallel or Series), element type (R, L, or C)
+    int numInputs = 0;
     bool addInverse = false;
     
     //User Prompt
-    printf("\nResistor (R), Capacitor (C), Inductor (I), or Default (D) (any other key to exit): "); //Default: two parallel resistors
+    printf("\n");
+    printf(USERPROMPT); //Default: two parallel resistors
     scanf(" %c", &etype);
     
     //Main Action
@@ -16,7 +21,7 @@ int main (void) {
         //Determining whether to add inverse based on user input and number of values to read in
         if (etype == 'D') {
             addInverse = true;
-            number = 2;
+            numInputs = 2;
         }
         else {
             printf("Parallel (P) or Series (S): ");
@@ -28,21 +33,20 @@ int main (void) {
                 addInverse = true;
             
             printf("How many values: ");
-            scanf("%d", &number);
+            scanf("%d", &numInputs);
         }
         
         //Reading in values and providing appropriate output
         double value = 0, holder;
         printf("Enter values separated by spaces: ");
-        for (int i = 0; i < number; i++)
-        {
+        for (int i = 0; i < numInputs; i++) {
             scanf("%lf", &holder);
-	    value += ((addInverse)? 1/holder : holder);
+	        value += ((addInverse)? 1/holder : holder);
         }
         printf("Final Value: %.8lf\n\n", ((addInverse)? 1/value : value));
         
         //User Prompt
-        printf("Resistor (R), Capacitor (C), Inductor (I), or Default (D) (any other key to exit): ");
+        printf(USERPROMPT);
         scanf(" %c", &etype);
     } 
     
