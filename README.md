@@ -1,11 +1,11 @@
-# circuithelpers
-Very basic code (in C/C++) to help with simplifying circuits (and a repo for testing with github).
-
-C Files:
-EquivalenceCalculator.c - A C program to find an equivalent of an R, L, or C network.
-
-C++ Files:
-ComplexOperations.cpp - A program to perform basic operations on two complex numbers (without the standard complex class).
-delta_wyecalculator.cpp - A program to do the delta-wye circuit conversion.
-Equivalence.cpp - A program to find the equivalent of an R, L, C, or phasor network.
+# Circuit Helpers
+A few short command line programs to help with simplifying basic RLC circuits, initially created while in basic circuit analysis courses.<br>
+(also a repo for experimenting)<br>
+<br>
+Makefile-generated Executables:<br>
+Equivalence - Calculate the equivalent of a resistive, inductive, capacitive, or phasor network.<br>
+ComplexOperations - Perform basic operations on two complex numbers (using a custom complex class).<br>
+Delta_WyeCalculator - Perform delta-wye circuit conversion.<br>
+<br>
+Other Files:<br>
 Complex.cpp/Complex.h - Header and cpp file for a custom complex class
