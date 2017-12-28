@@ -45,10 +45,6 @@ Complex::~Complex() {
 	//Nothing to be done
 }
 
-Complex Complex::inverse (void) const {
-	return (Complex(1,0)/(*this));
-}
-
 Complex Complex::operator+(const Complex& rhs) const {
 	return Complex(real+rhs.real, imaginary+rhs.imaginary);
 }
@@ -66,11 +62,11 @@ Complex Complex::operator/(const Complex& rhs) const {
 }
 
 Complex& Complex::operator+=(const Complex& rhs){
-	return ((*this) = (*this)+rhs); //return type of assignment operator is Complex&
+	return ((*this) = (*this)+rhs);
 }
 
 Complex& Complex::operator-=(const Complex& rhs){
-	return ((*this) = (*this)-rhs); //return type of assignment operator is Complex&
+	return ((*this) = (*this)-rhs);
 }
 
 istream& operator>>(istream& in, Complex& inVal) {
@@ -81,25 +77,26 @@ istream& operator>>(istream& in, Complex& inVal) {
 	in >> type;
 	
 	if (type == 1) {
-		cout << "Enter complex number (as Re{z1} Im{z1}): ";
+		cout << "Enter complex number (as Re{z} Im{z}): ";
 		in >> temp1 >> temp2;
 		inVal = Complex(temp1,temp2);
 	}
 	else if (type == 2) {
-		cout << "Enter complex number (as |z1| arg{z1} (in degrees)): ";
+		cout << "Enter complex number (as |z| arg{z} (in degrees)): ";
 		in >> temp1 >> temp2;
 		inVal = Complex(temp1,temp2,false);
 	}
 	else {
+		cerr << "Could not read appropriate type. Initializing with default constructor." << endl;
 		inVal = Complex();
 	}
 	
-	cout<<endl;
+	cout<<endl<<endl;
 	return in;
 }
 
 ostream& operator<<(ostream& out, const Complex& outVal) {
-	char sign = ((outVal.imaginary >= 0) ? '+' : 0);
+	char sign = ((outVal.imaginary >= 0) ? '+' : 0); //this sets the char to NULL not '0' if there is no sign
 	out<<outVal.real<<sign<<outVal.imaginary<<"i"<<" ("<<outVal.magnitude<<","<<outVal.angle<<")"<<endl;
 	return out;
 }
