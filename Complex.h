@@ -8,15 +8,21 @@
 #include <cmath>
 using namespace std;
 
-inline void polarSTDConversion (const double& mag, const double& angle, double& real, double& imag);
-inline void STDPolarConversion(const double& real, const double& imag, double& mag, double& angle);
+//Pre-processor definitions
+#define DEGREES_TO_RADIANS M_PI/180
+#define RADIANS_TO_DEGREES 180/M_PI
 
+//Helper function to convert from polar to STD form
+inline void polarSTDConversion (const double& mag, const double& angle, double& real, double& imag);
+
+//Complex Class
 class Complex {
 private:
 	double real;
 	double imaginary;
-	double magnitude;
-	double angle;
+	
+	double getMagnitude() const;
+	double getAngle() const;
 
 public:
 	Complex();
@@ -32,13 +38,13 @@ public:
 	Complex& operator+=(const Complex&); //return type of assignment operator is Complex&
 	Complex& operator-=(const Complex&);
 
-	//Friend Functions
-	//(I/O stream extraction and insertion operators)
+	//Friend Functions (allows extraction and insertion operators to work without accessors)
 	friend istream& operator>>(istream&, Complex&);
-	friend ostream& operator<<(ostream&, const Complex&); //inserts: a+bi (|z|,arg{z})\n
+	friend ostream& operator<<(ostream&, const Complex&); 
 };
 
-istream& operator>>(istream&, const Complex&); //Note: sends prompts to std::cout
-ostream& operator<<(ostream& out, const Complex& toPrint);
+//Prototypes for insertion and extraction operators
+istream& operator>>(istream&, const Complex&); //Note: sends prompts to std::cout and std::cerr
+ostream& operator<<(ostream& out, const Complex& toPrint); //inserts: a+bi (|z|,arg{z})\n
 
 #endif

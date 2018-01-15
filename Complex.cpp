@@ -1,7 +1,5 @@
 //Created by A Wan on November 13, 2016
 #include "Complex.h"
-#define DEGREES_TO_RADIANS M_PI/180
-#define RADIANS_TO_DEGREES 180/M_PI
 
 inline void polarSTDConversion (const double& mag, const double& angle, double& real, double& imag) {
 	real = mag*cos(angle*(DEGREES_TO_RADIANS));
@@ -9,34 +7,22 @@ inline void polarSTDConversion (const double& mag, const double& angle, double& 
 	return;
 }
 
-inline void STDPolarConversion(const double& real, const double& imag, double& mag, double& angle) {
-	mag = sqrt(((real*real)+(imag*imag)));
-	angle = atan(imag/real)*(RADIANS_TO_DEGREES);
-	return;
-}
-
 Complex::Complex() {
 	real=0;
 	imaginary=0;
-	magnitude=0;
-	angle=0;
 }
 
 Complex::Complex(double value1, double value2) {
 	real = value1;
 	imaginary = value2;
-	STDPolarConversion(real,imaginary,magnitude,angle);
 }
 
 Complex::Complex(double value1, double value2, bool stdform) {
 	if (stdform) {
 		real = value1;
 		imaginary = value2;
-		STDPolarConversion(value1,value2,magnitude,angle);
 	}
 	else {
-		magnitude = value1;
-		angle = value2;
 		polarSTDConversion(value1,value2,real,imaginary);
 	}
 }
@@ -62,11 +48,23 @@ Complex Complex::operator/(const Complex& rhs) const {
 }
 
 Complex& Complex::operator+=(const Complex& rhs){
-	return ((*this) = (*this)+rhs);
+	real += rhs.real;
+	imaginary += rhs.imaginary;
+	return (*this);
 }
 
 Complex& Complex::operator-=(const Complex& rhs){
-	return ((*this) = (*this)-rhs);
+	real -= rhs.real;
+	imaginary -= rhs.imaginary;
+	return (*this);
+}
+
+double Complex::getMagnitude() const {
+	return sqrt(((real*real)+(imaginary*imaginary)));
+}
+
+double Complex::getAngle() const {
+	return atan(imaginary/real)*(RADIANS_TO_DEGREES);
 }
 
 istream& operator>>(istream& in, Complex& inVal) {
@@ -96,8 +94,8 @@ istream& operator>>(istream& in, Complex& inVal) {
 }
 
 ostream& operator<<(ostream& out, const Complex& outVal) {
-	char sign = ((outVal.imaginary >= 0) ? '+' : 0); //this sets the char to NULL not '0' if there is no sign
-	out<<outVal.real<<sign<<outVal.imaginary<<"i"<<" ("<<outVal.magnitude<<","<<outVal.angle<<")"<<endl;
+	char sign = ((outVal.imaginary >= 0) ? '+' : 0); //Note: If it is negative, this sets the char to 0 not '0' (only '-' appears)
+	out<<outVal.real<<sign<<outVal.imaginary<<"i"<<" ("<<outVal.getMagnitude()<<","<<outVal.getAngle()<<")"<<endl;
 	return out;
 }
 

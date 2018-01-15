@@ -8,5 +8,5 @@ ComplexOperations - Perform basic operations on two complex numbers (using a cus
 Delta_WyeCalculator - Perform delta-wye circuit conversion.<br>
 <br>
 Other Files:<br>
-Complex.cpp/Complex.h - Header and cpp file for a custom Complex class
+Complex.cpp/Complex.h - Header and cpp file for a custom Complex class<br>
 EquivalenceCalculator.c - A C version of the EquivalenceCalculator (only for RLC circuits)
